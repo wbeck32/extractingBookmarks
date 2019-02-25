@@ -1,0 +1,22 @@
+{
+  "name": "dedupingbookmarks",
+  "version": "1.0.0",
+  "description": "Simple regEx to isolate URLs from a file",
+  "scripts": {
+    "test": "node puppeteer.js",
+    "start": "node regEx.js"
+  },
+  "author": "Wendy Beck",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^5.14.1",
+    "fs": "0.0.1-security",
+    "puppeteer": "^1.12.2"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
