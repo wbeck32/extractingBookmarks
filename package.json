@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Simple regEx to isolate URLs from a file",
   "scripts": {
-    "test": "node puppeteer.js",
+    "test": "ndb puppeteer.js",
     "start": "node regEx.js"
   },
   "author": "Wendy Beck",
@@ -11,6 +11,7 @@
   "dependencies": {
     "eslint": "^5.14.1",
     "fs": "0.0.1-security",
+    "ndb": "^1.0.43",
     "puppeteer": "^1.12.2"
   },
   "devDependencies": {
