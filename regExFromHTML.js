@@ -7,7 +7,7 @@ const fs = require('fs');
 const whitespaceRegEx = RegExp(/[\s\n\t]*/gm);
 const subst = '';
 
-let urlRegEx = RegExp(/((<a)[a-z.<>="-_/\s\S\n]*(<\/a>))/gm);
+let urlRegEx = RegExp(/(<ahref="[a-z.-_"]*)(<\/a>)/gm);
 
 const https = require('https');
 
@@ -29,30 +29,12 @@ https.get(options, (res) => {
     const lowerCase = decoded.toLowerCase();
     const noWhitespace = lowerCase.replace(whitespaceRegEx, subst);
     finalTotal = finalTotal.concat(noWhitespace);
-    // console.log(2, finalTotal);
     console.log('statusCode:', res.statusCode);
-    console.log(finalTotal.match(urlRegEx));
-    // fs.writeFile('dedupedFromHTML.js', end, (err) => {
-    //   console.log(2, 'error: ', err);
-    // });
+    const extractedUrls = finalTotal.match(urlRegEx);
+    console.log(extractedUrls);
+    //needs some cleanup before we write the file
+    fs.writeFile('dedupedFromHTML.js', extractedUrls, (err) => {
+      console.log(2, 'error: ', err);
+    });
   });
-  // res.end((finalData) => {
-  // });
 });
-
-// res.on('end', () => {
-//   console.log(noWhitespace);
-//   console.log('this is the end, my only friend, the end');
-// });
-// res.on('error', (e) => {
-//   console.error(`Got error: ${e.message}`);
-// });
-
-// fs.readLink('https://ask.metafilter.com/331739/Songs-that-take-place-during-a-nuclear-blast', 'utf8', (err, linkString) => {
-//     console.log(111);
-//     console.log(linkString);
-//     const lowerCase = linkString.toLowerCase();
-//     const noWhitespace = whitespaceRegEx.exec(lowerCase);
-//     console.log(noWhitespace);
-
-//   });
