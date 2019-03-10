@@ -9,11 +9,11 @@
   "author": "Wendy Beck",
   "license": "ISC",
   "dependencies": {
-    "eslint": "^5.14.1",
+    "apify": "^0.11.8",
+    "eslint": "^5.15.1",
     "fs": "0.0.1-security",
-    "headless-chrome-crawler": "^1.8.0",
     "ndb": "^1.0.43",
-    "puppeteer": "^1.12.2"
+    "puppeteer": "^1.13.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",
