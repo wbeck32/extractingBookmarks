@@ -3,11 +3,13 @@ const {
 } = require('string_decoder');
 const decoder = new StringDecoder('utf8');
 
-// const fs = require('fs');
-// const whitespaceRegEx = RegExp(/\s/gm);
-// let urlRegEx = RegExp(/((<a href=")[a-zA-Z./-\d\n\S\s]*(<\/a>))/gm);
-// let tmpArray = [];
-// let m;
+const fs = require('fs');
+const whitespaceRegEx = RegExp(/[\s\n\t]*/gm);
+const subst = '';
+
+let urlRegEx = RegExp(/((<a href=")[a-zA-Z./-\d\n\S\s]*(<\/a>))/gm);
+let tmpArray = [];
+let m;
 
 const https = require('https');
 
@@ -25,15 +27,24 @@ const options = {
 https.get(options, (res) => {
   console.log('statusCode:', res.statusCode);
   res.on('data', (d) => {
-    console.log(decoder.write(d));
+    const decoded = decoder.write(d);
+    const lowerCase = decoded.toLowerCase();
+    const noWhitespace = lowerCase.replace(whitespaceRegEx, subst);
+    console.log(noWhitespace);
+    fs.writeFile('dedupedFromHTML.js', noWhitespace, (err) => {
+      console.log(err);
+    });
   });
-  res.on('end', () => {
-    console.log('this is the end, my only friend, the end');
-  });
-  res.on('error', (e) => {
-    console.error(`Got error: ${e.message}`);
-  });
+
 });
+
+// res.on('end', () => {
+//   console.log(noWhitespace);
+//   console.log('this is the end, my only friend, the end');
+// });
+// res.on('error', (e) => {
+//   console.error(`Got error: ${e.message}`);
+// });
 
 // fs.readLink('https://ask.metafilter.com/331739/Songs-that-take-place-during-a-nuclear-blast', 'utf8', (err, linkString) => {
 //     console.log(111);
@@ -42,13 +53,4 @@ https.get(options, (res) => {
 //     const noWhitespace = whitespaceRegEx.exec(lowerCase);
 //     console.log(noWhitespace);
 
-//     while ((m = urlRegEx.exec(noWhitespace)) !== null) {
-//       if (m.index === urlRegEx.lastIndex) urlRegEx.lastIndex++;
-//       m.reduce((acc, cV) => {
-//         return typeof acc === 'string' && !tmpArray.includes(cV) ? tmpArray.push(acc) : console.log();
-//       });
-//     }
-//     fs.writeFile('dedupedFromHTML.js', `[${tmpArray}]`, (err) => {
-//       console.log(err);
-//     });
 //   });
