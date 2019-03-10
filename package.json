@@ -4,7 +4,7 @@
   "description": "Simple regEx to isolate URLs from a file",
   "scripts": {
     "test": "node puppeteer.js",
-    "start": "node regEx.js"
+    "start": "node regExFromHTML.js"
   },
   "author": "Wendy Beck",
   "license": "ISC",
