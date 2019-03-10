@@ -4,6 +4,7 @@ This is a script I wrote to extract bookmarks from an exported HTML bookmarks fi
 
 # TODOS
 - instead of requiring a downloaded HTML file, go directly to a URL
+- make two separate scripts that will either run on a URL or a local file
 - remove(?) query strings and header/footer/etc. specific to the domain URLs
 - limit number of concurrent connections to avoid crippling machine performance
 - save URLs and titles for URLs that return a status of 200
