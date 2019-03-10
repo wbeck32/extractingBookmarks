@@ -7,7 +7,7 @@ const fs = require('fs');
 const whitespaceRegEx = RegExp(/[\s\n\t]*/gm);
 const subst = '';
 
-let urlRegEx = RegExp(/((<a href=")[a-zA-Z./-\d\n\S\s]*(<\/a>))/gm);
+let urlRegEx = RegExp(/((<a)[a-z.<>="-_/\s\S\n]*(<\/a>))/gm);
 let tmpArray = [];
 let m;
 
@@ -15,7 +15,7 @@ const https = require('https');
 
 const options = {
   host : 'ask.metafilter.com',
-  path : '/',
+  path : '/331739/Songs-that-take-place-during-a-nuclear-blast',
   method : 'GET',
   encoding : 'utf8',
   headers : {
@@ -26,16 +26,27 @@ const options = {
 
 https.get(options, (res) => {
   console.log('statusCode:', res.statusCode);
+  let total;
+  let finalTotal;
   res.on('data', (d) => {
     const decoded = decoder.write(d);
     const lowerCase = decoded.toLowerCase();
     const noWhitespace = lowerCase.replace(whitespaceRegEx, subst);
-    console.log(noWhitespace);
-    fs.writeFile('dedupedFromHTML.js', noWhitespace, (err) => {
-      console.log(err);
-    });
+    total = noWhitespace;
+    finalTotal = total;
+    console.log(finalTotal);
   });
-
+  // while ((m = urlRegEx.exec(finalTotal)) !== null) {
+  //   // console.log(22, m);
+  //   if (m.index === urlRegEx.lastIndex) urlRegEx.lastIndex++;
+  //   m.reduce((acc, cV) => {
+  //     return typeof acc === 'string' && !tmpArray.includes(cV) ? tmpArray.push(acc) : console.log();
+  //   });
+  //   console.log(tmpArray);
+  // }
+  // fs.writeFile('dedupedFromHTML.js', total, (err) => {
+  //   console.log('error: ', err);
+  // });
 });
 
 // res.on('end', () => {
