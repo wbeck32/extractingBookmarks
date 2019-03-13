@@ -1,7 +1,7 @@
 // const HCCrawler = require('headless-chrome-crawler');
 const Apify = require('apify');
-const urls = require('./deduped');
-const urlsToCheck = urls.split(',');
+// const urls = require('./deduped');
+// const urlsToCheck = urls.split(',');
 let validLinks = [];
 
 
@@ -20,7 +20,6 @@ Apify.main(async () => {
     maxRequestsPerCrawl: 100,
     maxConcurrency: 10,
   });
-
   await crawler.run();
 });
 

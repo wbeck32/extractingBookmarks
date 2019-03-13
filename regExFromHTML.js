@@ -32,6 +32,7 @@ https.get(options, (res) => {
     console.log('statusCode:', res.statusCode);
     const extractedUrls = finalTotal.match(urlRegEx);
     console.log(extractedUrls);
+    //need to remove all metafilter.com? host domain references? blackist? regex?
     //needs some cleanup before we write the file
     fs.writeFile('dedupedFromHTML.js', extractedUrls, (err) => {
       console.log(2, 'error: ', err);
